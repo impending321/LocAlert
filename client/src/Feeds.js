@@ -31,10 +31,10 @@ function Feeds() {
       <h2 className="text-2xl font-bold mb-4">Feeds</h2>
       <div className="grid gap-4">
         {feeds.map(feed => (
-          <div key={feed.id} className="p-4 border border-gray-200 rounded-md">
+          <div key={feed.id} className="p-4 border border-logodark rounded-md">
             <h3 className="text-lg font-semibold mb-2">{feed.title}</h3>
-            <p className="text-gray-600 mb-2">Posted by {feed.author}</p>
-            <div className="flex items-center text-gray-600">
+            <p className="text-logodark mb-2">Posted by {feed.author}</p>
+            <div className="flex items-center text-logodark">
               <p className="mr-4">{feed.upvotes} Upvotes</p>
               <p>{feed.comments} Comments</p>
             </div>
@@ -45,4 +45,4 @@ function Feeds() {
   );
 }
 
-export{Feeds};
+export { Feeds };
