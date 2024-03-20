@@ -27,4 +27,4 @@ function HomePage() {
     );
   }
   
-  export{HomePage};
+  export default HomePage;

@@ -1,14 +1,17 @@
-import './App.css';
-import {HomePage} from "./HomePage"
-// import { CreatePost } from './CreatePost.js';
-// import {Feeds} from "./Feeds"
-// import {RecentNotifications} from "./RecentNotifications.js"
-// import { Categories } from './Categories.js';
+import React from 'react';
+import { BrowserRouter as Router, Routes , Route } from 'react-router-dom';
+import Login from './Login.js';
+import HomePage from './HomePage.js'; 
 
 function App() {
-  return (
-    <HomePage />
-  );
+    return (
+        <Router>
+          <Routes>
+                <Route path="/" element={<HomePage/>} />
+                <Route path="/login" element={<Login/>} />
+          </Routes>
+        </Router>
+    );
 }
 
 export default App;
