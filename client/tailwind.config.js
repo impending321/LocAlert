@@ -6,7 +6,8 @@ module.exports = {
       colors: {
         logodark: '#474951',
         logoyellow: '#FF8B1F',
-        logowhite: '#F7F8F8'
+        logowhite: '#F7F8F8',
+        webgreen : '#8f993e'
       }
 
     },

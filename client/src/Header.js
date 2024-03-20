@@ -1,6 +1,6 @@
 import image from './assets/LocAlert(LOGO).jpg';
 import font from './assets/loc(Font).png';
-
+import { CreatePost } from './CreatePost';
 import { MapIcon, UserIcon } from '@heroicons/react/outline';
 
 function Header() {
@@ -21,6 +21,9 @@ function Header() {
           <img src={image} alt="logo" className="w-12 h-12 sm:w-16 sm:h-16 m-2 sm:m-4" />
           <img src={font} alt="font" className="w-36 sm:w-48 h-auto m-2 sm:m-4" />
           {/* <p className="text-logodark text-lg">LocAlert</p> */}
+        </div>
+        <div className="flex items-center ml-auto justify-center">
+          <CreatePost />
         </div>
         <div className="flex items-center ml-auto">
           <p className='text-logodark text-lg mr-4 sm:mr-4'>{formattedDate}</p>

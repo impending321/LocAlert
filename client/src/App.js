@@ -1,15 +1,13 @@
 import './App.css';
-import {Header} from "./Header.js"
-import { CreatePost } from './CreatePost.js';
-import {Feeds} from "./Feeds.js"
+import {HomePage} from "./HomePage"
+// import { CreatePost } from './CreatePost.js';
+// import {Feeds} from "./Feeds"
+// import {RecentNotifications} from "./RecentNotifications.js"
+// import { Categories } from './Categories.js';
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-      <CreatePost/>
-      <Feeds/>
-    </div>
+    <HomePage />
   );
 }
 
