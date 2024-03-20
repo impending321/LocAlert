@@ -23,7 +23,7 @@ function Header() {
           {/* <p className="text-logodark text-lg">LocAlert</p> */}
         </div>
         <div className="flex items-center ml-auto">
-          <p className='text-logodark text-lg mr-4 sm:mr-8'>{formattedDate}</p>
+          <p className='text-logodark text-lg mr-4 sm:mr-4'>{formattedDate}</p>
           <form className="flex">
             <button onClick={handleMapIcon} className='h-8 w-8 sm:h-8 sm:w-8 mr-2 sm:mr-4'>
               <MapIcon className="text-logodark" />
