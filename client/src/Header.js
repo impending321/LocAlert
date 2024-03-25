@@ -1,12 +1,15 @@
 import image from './assets/LocAlert(LOGO).jpg';
 import font from './assets/loc(Font).png';
 import { MapIcon, UserIcon, PlusIcon } from '@heroicons/react/outline';
+import AuthContext from './AuthContext';
+import { useContext } from 'react';
 
 function Header({ handlePlusIcon, showCreatePost }) {
+  const auth = useContext(AuthContext);
   const handleUserIcon = (event) => {
-    event.preventDefault()
-    console.log("user icon clicked")
-  }
+    event.preventDefault();
+    auth.setAuth(true);
+  };
   const handleMapIcon = (event) => {
     event.preventDefault()
     console.log("map icon clicked")
