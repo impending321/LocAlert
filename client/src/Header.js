@@ -2,10 +2,12 @@ import image from './assets/LocAlert(LOGO).jpg';
 import font from './assets/loc(Font).png';
 import { MapIcon, UserIcon, PlusIcon } from '@heroicons/react/outline';
 import AuthContext from './AuthContext';
+import UserContext from './UserContext';
 import { useContext } from 'react';
 
 function Header({ handlePlusIcon, showCreatePost }) {
   const auth = useContext(AuthContext);
+  const user = useContext(UserContext);
   const handleUserIcon = (event) => {
     event.preventDefault();
     auth.setAuth(true);
@@ -26,6 +28,7 @@ function Header({ handlePlusIcon, showCreatePost }) {
       </div>
       <div className="flex items-center ml-auto">
         <p className='text-logodark font-bold text-lg mr-4 sm:mr-4'>{formattedDate}</p>
+        <p className='text-logodark font-bold text-lg mr-4 sm:mr-4'>{user.username}</p>
         <form className="flex">
           {!showCreatePost && <button type="button" className="h-8 w-8 sm:h-8 sm:w-8 sm:mr-4" onClick={handlePlusIcon}>
             <PlusIcon className="text-logodark" />

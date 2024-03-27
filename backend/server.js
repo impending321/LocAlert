@@ -44,7 +44,7 @@ async function startServer() {
         const userInfo = Jwt.verify(token, secret);
         User.findById(userInfo.id)
             .then(user => {
-                res.json({username: user.username});
+                res.json({ username: user.username });
             }).catch(e => {
                 console.log(e);
                 res.sendStatus(500);
@@ -52,6 +52,26 @@ async function startServer() {
     })
     app.post('/logout', (req, res) => {
         res.cookie('token', '').send();
+    })
+    app.post('/login', (req, res) => {
+        const { username, password } = req.body;
+        User.findOne({ username }).then(user => {
+            if (user && user.username) {
+                const match = (password === user.password) ? true : false;
+                if (match) {
+                    Jwt.sign({id: user._id}, secret, (err, token) => {
+                        if(err) {
+                            console.log(err);
+                            res.sendStatus(500);
+                        } else {
+                            res.cookie('token', token).send()
+                        }
+                    })
+                }
+            } else {
+                res.status(422).json('Invalid Username or Password');
+            }
+        });
     })
     app.listen(4000);
 }

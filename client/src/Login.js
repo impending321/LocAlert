@@ -1,6 +1,7 @@
 import React, { useState,useContext } from 'react';
 import axios from 'axios';
 import UserContext from "./UserContext.js";
+import AuthContext from './AuthContext.js';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -9,12 +10,17 @@ function Login() {
     const [location, setLocation] = useState('');
     const [isLogin, setIsLogin] = useState(true);
     const user = useContext(UserContext);
+    const auth = useContext(AuthContext);
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!isLogin) {
-            const data = { username, email, password, location }
+            const data = { username, email, password, location };
             axios.post('http://localhost:4000/signup', data, {withCredentials: true})
-            .then(() => user.setUser({username}))
+            .then(() => user.setUser({username}), auth.setAuth(false));
+        } else {
+            const data = {username, password}
+            axios.post('http://localhost:4000/login', data, {withCredentials: true})
+            .then(() => user.setUser({username}), auth.setAuth(false))
         }
     };
         return (

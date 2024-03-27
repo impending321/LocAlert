@@ -19,7 +19,7 @@ function App() {
     <AuthContext.Provider value={{ auth,setAuth}}>
     <UserContext.Provider value={{ ...user,logout,setUser }}>
       {(!auth && <HomePage />) ||
-      auth && <Login />}
+      (auth && <Login />)}
     </UserContext.Provider>
     </AuthContext.Provider>
   );
