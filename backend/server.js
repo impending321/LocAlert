@@ -23,22 +23,30 @@ async function startServer() {
     });
     app.post('/signup', (req, res) => {
         const { username, email, password, location } = req.body;
-        const user = new User({ username, email, password, location });
-        user.save().then(user => {
-            Jwt.sign({ id: user._id }, secret, (err, token) => {
-                if (err) {
-                    console.log(err);
-                    res.sendStatus(500);
-                } else {
-                    res.status(201).cookie('token', token).send();
+        User.findOne({ username }).then(existingUser => {
+            if (existingUser) {
+                return res.sendStatus(422);
+            }
+            User.findOne({ email }).then(existingEmail => {
+                if (existingEmail) {
+                    return res.sendStatus(422);
                 }
-            })
-            res.sendStatus(201);
-        }).catch(e => {
-            console.log(e);
-            res.sendStatus(500);
-        })
-    });
+                const user = new User({ username, email, password, location });
+                user.save().then(newUser => {
+                    Jwt.sign({ id: newUser._id }, secret, (err, token) => {
+                        if (err) {
+                            console.log(err);
+                            return res.sendStatus(500);
+                        }
+                        res.status(201).cookie('token', token).send();
+                    });
+                }).catch(e => {
+                    console.log(e);
+                    res.sendStatus(500);
+                });
+            });
+        });
+    });    
     app.get('/user', (req, res) => {
         const token = req.cookies.token;
         const userInfo = Jwt.verify(token, secret);
@@ -59,14 +67,16 @@ async function startServer() {
             if (user && user.username) {
                 const match = (password === user.password) ? true : false;
                 if (match) {
-                    Jwt.sign({id: user._id}, secret, (err, token) => {
-                        if(err) {
+                    Jwt.sign({ id: user._id }, secret, (err, token) => {
+                        if (err) {
                             console.log(err);
                             res.sendStatus(500);
                         } else {
                             res.cookie('token', token).send()
                         }
                     })
+                } else {
+                    res.status(422).json('Invalid Username or Password');
                 }
             } else {
                 res.status(422).json('Invalid Username or Password');

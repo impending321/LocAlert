@@ -1,6 +1,6 @@
 import image from './assets/LocAlert(LOGO).jpg';
 import font from './assets/loc(Font).png';
-import { MapIcon, UserIcon, PlusIcon } from '@heroicons/react/outline';
+import { MapIcon, LogoutIcon, PlusIcon } from '@heroicons/react/outline';
 import AuthContext from './AuthContext';
 import UserContext from './UserContext';
 import { useContext } from 'react';
@@ -8,8 +8,9 @@ import { useContext } from 'react';
 function Header({ handlePlusIcon, showCreatePost }) {
   const auth = useContext(AuthContext);
   const user = useContext(UserContext);
-  const handleUserIcon = (event) => {
+  const handleLogoutIcon = (event) => {
     event.preventDefault();
+    user.setUser({});
     auth.setAuth(true);
   };
   const handleMapIcon = (event) => {
@@ -36,8 +37,8 @@ function Header({ handlePlusIcon, showCreatePost }) {
           <button onClick={handleMapIcon} className='h-8 w-8 sm:h-8 sm:w-8 mr-2 sm:mr-4'>
             <MapIcon className="text-logodark" />
           </button>
-          <button onClick={handleUserIcon} className="h-8 w-8 sm:h-8 sm:w-8">
-            <UserIcon className="text-logodark" />
+          <button onClick={handleLogoutIcon} className="h-8 w-8 sm:h-8 sm:w-8">
+            <LogoutIcon className="text-logodark" />
           </button>
         </form>
       </div>

@@ -5,7 +5,7 @@ import axios from 'axios';
 import UserContext from './UserContext.js';
 import AuthContext from './AuthContext.js';
 function App() {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(true);
   const [user, setUser] = useState({})
   function logout() {
     axios.post('http://localhost:4000/logout', {}, {withCredentials: true})
@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:4000/user', { withCredentials: true })
       .then(res => setUser(res.data));
-  }, [])
+  }, []);
   return (
     <AuthContext.Provider value={{ auth,setAuth}}>
     <UserContext.Provider value={{ ...user,logout,setUser }}>
