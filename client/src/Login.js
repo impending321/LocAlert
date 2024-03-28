@@ -14,6 +14,8 @@ function Login() {
     const user = useContext(UserContext);
     const auth = useContext(AuthContext);
 
+    const exampleCities = ['New York', 'Los Angeles', 'London', 'Paris', 'Tokyo'];
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!isLogin) {
@@ -49,18 +51,38 @@ function Login() {
                             <input id="user" name="user" type="text" autoComplete="username" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none
                                 focus:ring-logodark focus:border-logodark focus:z-10 sm:text-sm" placeholder="User Name" value={username} onChange={(e) => setUsername(e.target.value)} />
                         </div>
-                        {!isLogin && <div>
-                            <label htmlFor="email-address" className="sr-only">Email address</label>
-                            <input id="email-address" name="email" type="email" autoComplete="email" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none
-                                focus:ring-logodark focus:border-logodark focus:z-10 sm:text-sm" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
-                        </div>}
+                        {!isLogin && (
+                            <div>
+                                <label htmlFor="email-address" className="sr-only">Email address</label>
+                                <input id="email-address" name="email" type="email" autoComplete="email" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none
+                                    focus:ring-logodark focus:border-logodark focus:z-10 sm:text-sm" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            </div>
+                        )}
                         <div>
                             <label htmlFor="password" className="sr-only">Password</label>
-                            <input id="password" name="password" type="password" autoComplete="current-password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none 
+                            <input id="password" name="password" type="password" autoComplete="current-password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none 
                                 focus:ring-logodark focus:border-logodark focus:z-10 sm:text-sm" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
+                        {!isLogin && (
+                            <div>
+                                <label htmlFor="location" className="sr-only">Location</label>
+                                <select
+                                    id="location"
+                                    name="location"
+                                    required
+                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none 
+                                    focus:ring-logodark focus:border-logodark focus:z-10 sm:text-sm"
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                >
+                                    <option value="" className="text-gray-500">Select Location</option>
+                                    {exampleCities.map(city => (
+                                        <option key={city} value={city}>{city}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
                     </div>
-
                     <div className="flex items-center justify-between">
                         <div className="text-sm text-center w-full">
                             <button type="button" className="font-medium text-logodark hover:text-logodark " onClick={() => setIsLogin(!isLogin)}>
@@ -68,11 +90,11 @@ function Login() {
                             </button>
                         </div>
                     </div>
-
-                    {isError && <div className="text-center">
-                        <p className="text-red-500">{isLogin ? "Invalid Username or Password" : "Username or Email Already Exists"}</p>
-                    </div>}
-
+                    {isError && (
+                        <div className="text-center">
+                            <p className="text-red-500">{isLogin ? "Invalid Username or Password" : "Username or Email Already Exists"}</p>
+                        </div>
+                    )}
                     <div>
                         <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-logoyellow hover:bg-logoyellow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logodark">
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">

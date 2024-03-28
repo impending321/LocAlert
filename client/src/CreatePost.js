@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import UserContext from "./UserContext.js";
+import axios from 'axios';
 import 'leaflet/dist/leaflet.css';
 
-const CreatePost = ({setCreatePost}) => {
+const CreatePost = ({ setCreatePost }) => {
   const [category, setCategory] = useState('');
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState('');
   const [photo, setPhoto] = useState(null);
   const [description, setDescription] = useState('');
-
+  const user = useContext(UserContext);
+  useEffect(() => {
+    axios.get('http://localhost:4000/location', {withCredentials: true})
+    .then(res => setLocation(res.data.location))
+  }, []);
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
@@ -22,12 +28,18 @@ const CreatePost = ({setCreatePost}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., send data to backend)
-    console.log('Category:', category);
-    console.log('Location:', location);
-    console.log('Photo:', photo);
-    console.log('Description:', description);
-    // Reset form fields
+    const formData = new FormData();
+    formData.append('author', user.username);
+    formData.append('category', category);
+    formData.append('description', description);
+    formData.append('location', location);
+    formData.append('image', photo);
+    axios.post('http://localhost:4000/posts', formData, { withCredentials: true }, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    console.log(location);
     setCategory('');
     setLocation(null);
     setPhoto(null);
@@ -35,7 +47,7 @@ const CreatePost = ({setCreatePost}) => {
     setCreatePost(false);
   };
 
-  const MarkLocation = () => {
+  {/*const MarkLocation = () => {
     // eslint-disable-next-line
     const map = useMapEvents({
       dblclick(e) {
@@ -45,7 +57,7 @@ const CreatePost = ({setCreatePost}) => {
       },
     });
     return location === null ? null : <Marker position={location} />;
-  };
+  };*/}
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-rgb(255,139,31) flex justify-center items-center">
@@ -71,7 +83,7 @@ const CreatePost = ({setCreatePost}) => {
               <option value="healthcare">Healthcare</option>
             </select>
           </div>
-          <div className="mb-4">
+          {/*<div className="mb-4">
             <label htmlFor="location" className="block text-sm font-bold text-gray-700 mb-2">
               Mark Location on Map
             </label>
@@ -80,8 +92,8 @@ const CreatePost = ({setCreatePost}) => {
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <MarkLocation />
               </MapContainer>
-            </div>
-          </div>
+  </div>
+          </div>*/}
           <div className="mb-4">
             <label htmlFor="photo" className="block text-sm font-bold text-gray-700 mb-2">
               Upload Photo/Video

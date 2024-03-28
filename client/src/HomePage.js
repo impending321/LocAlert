@@ -32,7 +32,6 @@ function HomePage() {
       )}
       {!showCreatePost && (
         <div className="container mx-auto mt-8 flex">
-          {/* Categories Section */}
           <div className="w-1/4 pr-8">
             <AnimateIn
               from="opacity-0 -translate-x-32"
@@ -42,7 +41,6 @@ function HomePage() {
               <Categories />
             </AnimateIn>
           </div>
-          {/* Feeds Section */}
           <div className="w-2/4 pr-8">
             <AnimateIn
               from="opacity-0 -translate-y-4"
@@ -52,7 +50,6 @@ function HomePage() {
               <Feeds />
             </AnimateIn>
           </div>
-          {/* Recent Notifications Section */}
           <div className="w-1/4">
             <AnimateIn
               from="opacity-0 translate-x-32"
