@@ -37,8 +37,6 @@ function Header({ handlePlusIcon, showCreatePost }) {
       setShowCitiesDropdown(false);
   };
   
-  
-
   const currentDate = new Date();
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = currentDate.toLocaleDateString(undefined, options);
@@ -55,7 +53,7 @@ function Header({ handlePlusIcon, showCreatePost }) {
         </div>
         <div className="flex items-center ml-auto">
           <p className='text-logodark font-bold text-lg mr-4 sm:mr-4'>{formattedDate}</p>
-          <p className='text-logodark font-bold text-lg mr-4 sm:mr-4'>{user.username}</p>
+         
           <form className="flex">
             {!showCreatePost && <button type="button" className="h-8 w-8 sm:h-8 sm:w-8 sm:mr-4" onClick={handlePlusIcon}>
               <PlusIcon className="text-logodark" />
@@ -67,6 +65,9 @@ function Header({ handlePlusIcon, showCreatePost }) {
               <LogoutIcon className="text-logodark" />
             </button>
           </form>
+          <div className="ml-4 border border-logodark rounded-md p-1"> {/* Add border around the username */}
+            <p className='text-logodark font-bold text-lg'>{user.username}</p>
+          </div>
         </div>
       </header>
       {showCitiesDropdown && (
@@ -91,4 +92,3 @@ function Header({ handlePlusIcon, showCreatePost }) {
 }
 
 export { Header };
-
