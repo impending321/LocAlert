@@ -3,19 +3,34 @@ import { Feeds } from "./Feeds"
 import { RecentNotifications } from "./RecentNotifications.js"
 import { Categories } from './Categories.js';
 import CreatePost from "./CreatePost.js";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import AnimateIn from "./Animate.tsx"
 import UserContext from "./UserContext.js";
 import AuthContext from './AuthContext';
+import axios from 'axios';
 
 function HomePage() {
   const auth = useContext(AuthContext);
   const [showCreatePost, setCreatePost] = useState(false)
+  const [location, setLocation] = useState(' ');
   const user = useContext(UserContext);
+  const [category, setCategory] = useState('road');
   const handlePlusIcon = (event) => {
     event.preventDefault()
     setCreatePost(true)
   }
+  useEffect(() => {
+    axios.get('http://localhost:4000/location', { withCredentials: true })
+      .then(res => {
+        const receivedLocation = res.data.location;
+        if (receivedLocation && receivedLocation.trim() !== '') {
+          setLocation(receivedLocation);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching location:', error);
+      });
+  }, [location]);
   return (
     <div className="App">
       <Header handlePlusIcon={handlePlusIcon} showCreatePost={showCreatePost} />
@@ -38,7 +53,7 @@ function HomePage() {
               to="opacity-100 translate-y-0 translate-x-0"
               delay="500"
             >
-              <Categories />
+              <Categories setCategory={setCategory}/>
             </AnimateIn>
           </div>
           <div className="w-2/4 pr-8">
@@ -47,7 +62,7 @@ function HomePage() {
               to="opacity-100 translate-y-0 translate-x-0"
               delay="200"
             >
-              <Feeds />
+              <Feeds category={category} location={location}/>
             </AnimateIn>
           </div>
           <div className="w-1/4">
