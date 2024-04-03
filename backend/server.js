@@ -28,7 +28,7 @@ async function startServer() {
     
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
-            cb(null, 'D:/LocAlert/backend/uploads');
+            cb(null, 'C:/Users/Siddhanth/Desktop/Coding/LocAlert/backend/uploads');
         },
         filename: (req, file, cb) => {
             cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -169,6 +169,10 @@ async function startServer() {
     app.post('/notif', async (req, res) => {
         const { id, username } = req.body;
         try {
+            const notifs = await Notifications.findOne({ postId: id, by: username });
+            if (notifs) {
+                return res.status(200).json('Already liked');
+            }
             const post = await Post.findById(id).select('author');
             if (!post) {
                 return res.sendStatus(404);
