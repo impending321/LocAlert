@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import UserContext from "./UserContext.js";
 import axios from 'axios';
-import 'leaflet/dist/leaflet.css';
 
 const CreatePost = ({ setCreatePost }) => {
   const [category, setCategory] = useState('');
@@ -10,10 +8,12 @@ const CreatePost = ({ setCreatePost }) => {
   const [photo, setPhoto] = useState(null);
   const [description, setDescription] = useState('');
   const user = useContext(UserContext);
+
   useEffect(() => {
     axios.get('http://localhost:4000/location', {withCredentials: true})
     .then(res => setLocation(res.data.location))
   }, []);
+
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
@@ -39,7 +39,6 @@ const CreatePost = ({ setCreatePost }) => {
         'Content-Type': 'multipart/form-data'
       }
     });
-    console.log(location);
     setCategory('');
     setLocation(null);
     setPhoto(null);
@@ -47,30 +46,18 @@ const CreatePost = ({ setCreatePost }) => {
     setCreatePost(false);
   };
 
-  {/*const MarkLocation = () => {
-    // eslint-disable-next-line
-    const map = useMapEvents({
-      dblclick(e) {
-        setLocation(e.latlng);
-        // You can send the location to the database here
-        // Example: sendLocationToDatabase(e.latlng);
-      },
-    });
-    return location === null ? null : <Marker position={location} />;
-  };*/}
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-rgb(255,139,31) flex justify-center items-center">
+    <div className="min-h-screen bg-gradient-to-b from-white to-orange-400 flex justify-center items-center">
       <div className="bg-white rounded-lg p-8 max-w-md w-full shadow-md">
-        <h2 className="text-2xl font-bold text-rgb(71,73,81) mb-4">Report your Problem</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="category" className="block text-sm font-bold text-gray-700 mb-2">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Report your Problem</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="category" className="block text-sm font-semibold text-gray-900 mb-2">
               Select Problem Category
             </label>
             <select
               id="category"
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-00 leading-tight focus:outline-none focus:ring focus:border-orange-500"
               value={category}
               onChange={handleCategoryChange}
             >
@@ -83,27 +70,16 @@ const CreatePost = ({ setCreatePost }) => {
               <option value="healthcare">Healthcare</option>
             </select>
           </div>
-          {/*<div className="mb-4">
-            <label htmlFor="location" className="block text-sm font-bold text-gray-700 mb-2">
-              Mark Location on Map
-            </label>
-            <div style={{ height: '300px' }} className="mb-2">
-              <MapContainer center={[0, 0]} zoom={2} className="w-full h-full">
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <MarkLocation />
-              </MapContainer>
-  </div>
-          </div>*/}
-          <div className="mb-4">
-            <label htmlFor="photo" className="block text-sm font-bold text-gray-700 mb-2">
-              Upload Photo/Video
+          <div>
+            <label htmlFor="photo" className="block text-sm font-semibold text-gray-900 mb-2">
+              Upload File
             </label>
             <input
               id="photo"
               type="file"
               accept="image/*"
               onChange={handlePhotoChange}
-              className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-orange-500"
             />
             {photo && (
               <div className="mt-2">
@@ -111,22 +87,22 @@ const CreatePost = ({ setCreatePost }) => {
               </div>
             )}
           </div>
-          <div className="mb-4">
-            <label htmlFor="description" className="block text-sm font-bold text-gray-700 mb-2">
+          <div>
+            <label htmlFor="description" className="block text-sm font-semibold text-gray-900 mb-2">
               Description Of Problem
             </label>
             <textarea
               id="description"
               rows="4"
               placeholder="Description"
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-orange-500"
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
           </div>
           <button
             type="submit"
-            className="bg-rgb(255,139,31) hover:bg-orange-600 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-orange-400 hover:bg-orange-600 text-gray-700 font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:border-orange-500"
           >
             Submit
           </button>
