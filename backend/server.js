@@ -28,6 +28,7 @@ async function startServer() {
     
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
+            cb(null, 'C:/Users/Siddhanth/Desktop/Coding/LocAlert/backend/uploads');
         },
         filename: (req, file, cb) => {
             cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
