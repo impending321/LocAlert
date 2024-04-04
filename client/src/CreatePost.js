@@ -60,8 +60,8 @@ const CreatePost = ({ setCreatePost }) => {
   };*/}
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-rgb(255,139,31) flex justify-center items-center">
-      <div className="bg-white rounded-lg p-8 max-w-md w-full shadow-md">
+    <div className="min-h-screen  bg-gradient-to-b from-white to-orange-400 flex justify-center items-center">
+      <div className=" bg-white rounded-lg p-8 max-w-md w-full shadow-md">
         <h2 className="text-2xl font-bold text-rgb(71,73,81) mb-4">Report your Problem</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

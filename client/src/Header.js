@@ -41,11 +41,11 @@ function Header({ handlePlusIcon, showCreatePost }) {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = currentDate.toLocaleDateString(undefined, options);
 
-  const cities = ['New York', 'London', 'Tokyo', 'Paris', 'Sydney']; // List of cities
+  const cities = ['New Delhi', 'Mumbai', 'Kolkata', 'Chennai']; // List of cities
 
   return (
     <div className="relative">
-      <header className="flex justify-between items-center w-full h-16 sm:h-20 bg-logoyellow p-4 sm:p-6">
+      <header className="flex justify-between items-center w-full h-16 sm:h-20 bg-logoyellow p-4 sm:p-6 fixed top-0 left-0 shadow-md z-50">
         <div className="flex items-center">
           <img src={image} alt="logo" className="w-12 h-12 sm:w-16 sm:h-16 m-2 sm:m-4" />
           <img src={font} alt="font" className="w-36 sm:w-48 h-auto m-2 sm:m-4" />

@@ -6,7 +6,7 @@ function Categories({setCategory}) {
   const values = ["road", "sewage", "electricity", "waterSupply", "transportation", "healthcare"];
   
   return (
-    <div className="bg-white shadow-md rounded-md p-4">
+    <div className="bg-white shadow-md rounded-md p-4 py-16">
       <h2 className="text-lg font-semibold mb-4">Categories</h2>
       <ul>
         {categories.map((category, index) => (

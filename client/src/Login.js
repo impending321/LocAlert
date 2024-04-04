@@ -14,7 +14,7 @@ function Login() {
     const user = useContext(UserContext);
     const auth = useContext(AuthContext);
 
-    const exampleCities = ['New York', 'Los Angeles', 'London', 'Paris', 'Tokyo'];
+    const exampleCities = ['New Delhi', 'Mumbai', 'Kolkata', 'Chennai'];
 
     const handleSubmit = (event) => {
         event.preventDefault();

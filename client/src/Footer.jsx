@@ -4,7 +4,7 @@ import { FaInstagram, FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 function Footer() {
   return (
-    <div className='h-screen bg-zinc-800 p-20 w-full'>
+    <div className='h-screen bg-zinc-800 p-20 w-full text-zinc-300'>
       <div className='flex gap-5 w-full h-[99.5%]'>
         <div className='w-1/2 h-full flex flex-col justify-between font-["Founders Grotesk X Condensed"] '>
             <div className='heading leading-[10em]'>

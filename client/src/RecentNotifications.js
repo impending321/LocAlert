@@ -19,7 +19,7 @@ function RecentNotifications() {
   }, [])
 
   return (
-    <div className="bg-gray-50 shadow-md rounded-md p-4">
+    <div className="bg-gray-50 shadow-md rounded-md p-4 py-16">
       <h2 className="text-lg font-semibold mb-4">Recent Notifications</h2>
       {notif.map(notification => (
         <div key={notification._id} className="mb-4 bg-white border border-gray-300 rounded-lg p-4">

@@ -277,8 +277,8 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-evenly overflow-y-auto">
-      <h1 className="text-7xl border-b-2 pb-3">User Reviews</h1>
+    <div className="min-h-screen bg-zinc-200 w-full flex flex-col items-center justify-evenly overflow-y-auto">
+      <h1 className="text-7xl border-b-2 pb-3 border-zinc-800">User Reviews</h1>
       <div
         className="testimonial-container bg-blue-600 text-white rounded-lg p-8 max-w-lg mx-auto relative h-80vh overflow-y-auto"
         onMouseEnter={handleMouseEnter}
@@ -315,8 +315,8 @@ const Testimonials = () => {
         </div>
       </div>
       <div className="flex mt-4">
-        <button className="border border-gray-300 rounded-md px-4 py-2 mr-2 hover:bg-white hover:text-black" onClick={handlePrevClick}>Previous</button>
-        <button className="border border-gray-300 rounded-md px-4 py-2 hover:bg-white hover:text-black" onClick={handleNextClick}>Next</button>
+        <button className="border border-gray-300 rounded-md px-4 py-2 mr-2 hover:bg-black hover:text-white" onClick={handlePrevClick}>Previous</button>
+        <button className="border border-gray-300 rounded-md px-4 py-2 hover:bg-black hover:text-white" onClick={handleNextClick}>Next</button>
       </div>
     </div>
   );

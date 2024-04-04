@@ -10,9 +10,9 @@ function Intro() {
     return (
         <>
             <Navbar/>
-            <About />
             <LandingPage />
             <Marquee/>
+            <About />
             <Testimonials/>
             <Footer/>
         </>
