@@ -169,6 +169,10 @@ async function startServer() {
     app.post('/notif', async (req, res) => {
         const { id, username } = req.body;
         try {
+            const notifs = await Notifications.findOne({ postId: id, by: username });
+            if (notifs) {
+                return res.status(200).json('Already liked');
+            }
             const post = await Post.findById(id).select('author');
             if (!post) {
                 return res.sendStatus(404);
@@ -186,10 +190,6 @@ async function startServer() {
     app.get('/notif', async (req, res) => {
         const { author } = req.query;
         try {
-            const post = await Post.findById(id).select('author');
-            if (!post) {
-                return res.sendStatus(404);
-            }
             const notifications = await Notifications.find({ author }).sort({ date: -1 });
             res.status(200).json(notifications);
         } catch (error) {

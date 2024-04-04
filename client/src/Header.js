@@ -37,17 +37,15 @@ function Header({ handlePlusIcon, showCreatePost }) {
       setShowCitiesDropdown(false);
   };
   
-  
-
   const currentDate = new Date();
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = currentDate.toLocaleDateString(undefined, options);
 
-  const cities = ['New York', 'London', 'Tokyo', 'Paris', 'Sydney']; // List of cities
+  const cities = ['New Delhi', 'Mumbai', 'Kolkata', 'Chennai']; // List of cities
 
   return (
     <div className="relative">
-      <header className="flex justify-between items-center w-full h-16 sm:h-20 bg-logoyellow p-4 sm:p-6">
+      <header className="flex justify-between items-center w-full h-16 sm:h-20 bg-logoyellow p-4 sm:p-6 fixed top-0 left-0 shadow-md z-50">
         <div className="flex items-center">
           <img src={image} alt="logo" className="w-12 h-12 sm:w-16 sm:h-16 m-2 sm:m-4" />
           <img src={font} alt="font" className="w-36 sm:w-48 h-auto m-2 sm:m-4" />
@@ -55,7 +53,7 @@ function Header({ handlePlusIcon, showCreatePost }) {
         </div>
         <div className="flex items-center ml-auto">
           <p className='text-logodark font-bold text-lg mr-4 sm:mr-4'>{formattedDate}</p>
-          <p className='text-logodark font-bold text-lg mr-4 sm:mr-4'>{user.username}</p>
+         
           <form className="flex">
             {!showCreatePost && <button type="button" className="h-8 w-8 sm:h-8 sm:w-8 sm:mr-4" onClick={handlePlusIcon}>
               <PlusIcon className="text-logodark" />
@@ -67,6 +65,9 @@ function Header({ handlePlusIcon, showCreatePost }) {
               <LogoutIcon className="text-logodark" />
             </button>
           </form>
+          <div className="ml-4 border border-logodark rounded-md p-1"> {/* Add border around the username */}
+            <p className='text-logodark font-bold text-lg'>{user.username}</p>
+          </div>
         </div>
       </header>
       {showCitiesDropdown && (
@@ -91,4 +92,3 @@ function Header({ handlePlusIcon, showCreatePost }) {
 }
 
 export { Header };
-

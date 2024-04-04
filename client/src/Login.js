@@ -14,7 +14,7 @@ function Login() {
     const user = useContext(UserContext);
     const auth = useContext(AuthContext);
 
-    const exampleCities = ['New York', 'Los Angeles', 'London', 'Paris', 'Tokyo'];
+    const exampleCities = ['New Delhi', 'Mumbai', 'Kolkata', 'Chennai'];
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -58,11 +58,20 @@ function Login() {
                                     focus:ring-logodark focus:border-logodark focus:z-10 sm:text-sm" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
                         )}
+                        {isLogin &&(
                         <div>
                             <label htmlFor="password" className="sr-only">Password</label>
                             <input id="password" name="password" type="password" autoComplete="current-password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none 
-                                focus:ring-logodark focus:border-logodark focus:z-10 sm:text-sm" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                focus:ring-logodark rounded-b-md focus:border-logodark focus:z-10 sm:text-sm" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
+                        )}
+                        {!isLogin &&(
+                            <div>
+                                <label htmlFor="password" className="sr-only">Password</label>
+                                <input id="password" name="password" type="password" autoComplete="current-password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none 
+                                    focus:ring-logodark  focus:border-logodark focus:z-10 sm:text-sm" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            </div>
+                            )}
                         {!isLogin && (
                             <div>
                                 <label htmlFor="location" className="sr-only">Location</label>
@@ -85,9 +94,9 @@ function Login() {
                     </div>
                     <div className="flex items-center justify-between">
                         <div className="text-sm text-center w-full">
-                            <button type="button" className="font-medium text-logodark hover:text-logodark " onClick={() => setIsLogin(!isLogin)}>
-                                {isLogin ? 'Create an account' : 'Log in'}
-                            </button>
+                        <button type="button" className="font-medium text-logodark border-solid border-logoyellow hover:text-logodark border h-[40px] w-[150px] rounded-md" onClick={() => setIsLogin(!isLogin)}>
+                             {isLogin ? 'Create an account' : 'Log in'}
+                        </button>
                         </div>
                     </div>
                     {isError && (
